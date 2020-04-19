@@ -4,5 +4,5 @@ var displayName = function displayName(name) {
   console.log("hello ".concat(name));
 };
 
-displayName("John");
-displayName("Elie");
+displayName("Jonas");
+displayName("Eliza");
