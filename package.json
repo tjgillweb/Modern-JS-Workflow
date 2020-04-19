@@ -1,0 +1,24 @@
+{
+  "name": "modern-js-workflow",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tjgillweb/Modern-JS-Workflow.git"
+  },
+  "author": "Taranjot Gill",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tjgillweb/Modern-JS-Workflow/issues"
+  },
+  "homepage": "https://github.com/tjgillweb/Modern-JS-Workflow#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.5"
+  }
+}
