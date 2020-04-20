@@ -36,7 +36,9 @@ C:\...path> node_modules/.bin/babel src/index.js -o dist/assets/bundle.js
 **`package.json`**
 ```
 ...
-"scripts": "node_modules/.bin/babel src/index.js -w -o dist/assets/bundle.js"
+"scripts": {
+    "babel": "node_modules/.bin/babel src/index.js -w -o dist/assets/bundle.js"
+}
 ...
 ```
 
@@ -44,4 +46,64 @@ C:\...path> node_modules/.bin/babel src/index.js -o dist/assets/bundle.js
 ```
 C:\...path> npm run babel
 ```
+
+### Setup Webpack Configuration File
+- Create a file named `webpack.config.js` in the root directory of the Project Folder.  
+
+**webpack.config.js**
+```Javascript
+const path = require('path'); //'path' is a built-in module in the nodeJs core library.
+module.exports = {
+    entry: './src/index.js'
+    output: {
+        path: path.resolve(__dirname, 'dist/assets'),
+        filename: 'bundle.js';
+    }
+};
+```
+- Inside `webpack.config.js`, we add options and configuration on how webpack is going to run.
+- `module.exports` means that we are going to export a webpack configuratuion object which then node.js is going to process when we run the webpack command later.
+
+> module.exports is available only when we're running node on our computer, it does not execute on the browser.
+
+- Inside the module.exports object, we need to specify two main properties: 
+    - an entry propery and 
+    - an output property.  
+
+- The **entry property** is a path to a file which our initial input file is living. Its a relative URL in the current directory.
+- The **output property** describes where we want the resulting JS bundle file to be output.
+
+- output is not a single string value, its going to be an object, because we need to specify a couple of things.
+- First we define path: its not a relative URL its an absolute URL, but its not appropriate if someone downloads the code from github, they will have to update the absolute URL. So, we use another node only feature i.e. the dirname property
+
+**`__dirname:`** gives the absolute path up untill the root directory of the project, where the webpack file is sitting
+
+### Using Webpack CLI
+
+To run Webpack, we need to install two things: 
+- webpack core package
+- webpack CLI
+```
+npm install webpack webpack-cli --save-dev
+```
+- Webpack CLI is stored inside node_modules/.bin/webpack
+
+```
+...path> node_modules/.bin/webpack
+```
+
+**package.json**
+```
+...
+"scripts": {
+"babel": "node_modules/.bin/babel src/index.js -w -o dist/assets/bundle.js",
+"webpack": "node_modules/.bin/webpack"
+}
+...
+```
+To run the webpack we use: 
+```
+...path> npm run webpack
+```
+
 
