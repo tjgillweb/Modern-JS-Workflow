@@ -46,6 +46,7 @@ C:\...path> node_modules/.bin/babel src/index.js -o dist/assets/bundle.js
 ```
 C:\...path> npm run babel
 ```
+---------------------------------------------------------------------------------------------------------------------------------------
 
 ### Setup Webpack Configuration File
 - Create a file named `webpack.config.js` in the root directory of the Project Folder.  
@@ -105,5 +106,74 @@ To run the webpack we use:
 ```
 ...path> npm run webpack
 ```
+----------------------------------------------------------------------------------------------------------------------------------------
 
+### Import and Export Modules
+- We can use functions, strings, arrays, objects etc. defined in one file in another file by exporting them. 
 
+Create a file named `dom.js` in the src
+```Javascript
+console.log('dom file');
+const body = document.querySelector('body');
+
+export const styleBody = () => {
+    body.style.background = "#BADA55";
+};
+
+export const addTitle = (text) => {
+    const title = document.createElement('h1');
+    title.textContent = text;
+    body.appendChild(title);
+}
+export const contact = "tjgillweb@gmail.com";
+```
+Add the following code in `index.js`
+```javascript
+import {styleBody, addTitle, contact} from './dom';
+
+console.log('index file');
+addTitle('Hello');
+styleBody();
+console.log(contact); 
+```
+
+- To export many items in one go we omit the `export` keyword in front of each function/string and use the following syntax:
+```javascript
+export{ styleBody, addTitle, contact }; 
+```
+
+#### Default Export
+- Create a file named `data.js` inside the src folder.
+```javascript
+const users = [
+    { name: 'John', premium: true },
+    { name: 'Elie', premium: false },
+    { name: 'Adam', premium: true },
+    { name: 'Eric', premium: true },
+    { name: 'Caty', premium: false },
+    { name: 'Sarah', premium: true }
+];
+//default value that we export from this file
+export default users;
+
+export const getPremiumUsers= (users) => {
+    return users.filter(user => user.premium);
+}
+```
+- To export both named and default export, omit the `export` keyword in front of them and use the following syntax:
+```javascript
+export {getPremiumUsers, users as default}; 
+```
+
+- To import a default export in the `index.js` file we can use any name to import the default data e.g. `test`. But we use `users`
+```javascript
+//import test from './data'
+import users from './data';
+
+const premUsers = getPremiumUsers(users);
+console.log(users, premUsers);
+```
+- To import both named and default export use the following
+```javascript
+import users, { getPremiumUsers } from './data';
+```
