@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "babel": "node_modules/.bin/babel src/index.js -w -o dist/assets/bundle.js",
-    "webpack": "node_modules/.bin/webpack -w"
+    "webpack": "node_modules/.bin/webpack -w",
+    "serve": "webpack-dev-server"
   },
   "repository": {
     "type": "git",
@@ -23,5 +24,8 @@
     "@babel/preset-env": "^7.9.5",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11"
+  },
+  "dependencies": {
+    "webpack-dev-server": "^3.2.1"
   }
 }
