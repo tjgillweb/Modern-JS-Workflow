@@ -98,7 +98,7 @@ npm install webpack webpack-cli --save-dev
 ...
 "scripts": {
 "babel": "node_modules/.bin/babel src/index.js -w -o dist/assets/bundle.js",
-"webpack": "node_modules/.bin/webpack"
+"webpack": "node_modules/.bin/webpack -w"
 }
 ...
 ```
@@ -176,4 +176,42 @@ console.log(users, premUsers);
 - To import both named and default export use the following
 ```javascript
 import users, { getPremiumUsers } from './data';
+```
+---------------------------------------------------------------------------------------------------------------------------------------
+
+### Webpack Dev Server
+- To run our code, we have to open our VS Code package called Live Server to spin up a Local Development service so we can preview the project in a browser. And then we also manually enter the webpack command with a watch flag in the terminal to capture any changes and rebundle our code.
+- It would be better if we combine both of these tasks into one. We can do this using the Webpack Dev Server.
+
+#### 1. Install the Webpack Dev Server
+```
+$ npm install webpack-dev-server@3.2.1
+```
+
+#### 2. Configure the webpack dev server inside the webpack config file
+**webpack.config.js**
+```Javascript
+const path = require('path');
+module.exports = {
+    ...
+    devServer : {
+        contentBase: path.resolve(__dirname, 'dist'),
+        publicPath: '/assets/'
+    }
+};
+```
+- Inside the devServer object we have 2 properties:
+    - `contentBase`: absolute path which is gonna tell webpack dev server where the base directory is that we want to serve to the browser.
+    - `publicPath`: this tells webpack where the actual assets are either javascript are being served of from.
+
+- We need to tell this to the webpack server because when it serves up our files inside the publicPath to the browser, it doesn't actually serve up the real physical files inside it. Instead, it serves the virtual files that are stored in memory.and it uses the publicPath to serve this. bcause it the path that is linked from the index.html.
+
+### Make a new script inside package.json
+**package.json**
+```
+"serve": "webpack-dev-server"
+```
+Now we just need to run this command: 
+```
+$ npm run serve
 ```
